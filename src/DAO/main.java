@@ -13,7 +13,7 @@ public class main {
 		
 		SellerDAO sellerDAO = DaoFactoory.createSellerDAO();
 		Seller seller = sellerDAO.findById(3);
-		
+		System.out.println("Test 1 ------------------------ FindById");
 		System.out.println(seller);
 	}
 

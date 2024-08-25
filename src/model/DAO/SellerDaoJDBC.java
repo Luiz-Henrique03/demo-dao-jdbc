@@ -43,12 +43,12 @@ public class SellerDaoJDBC implements SellerDAO{
 	}
 
 	@Override
-	public Seller findById(Integer id) {
+	public Seller findById(Integer id) throws SQLException {
 		
 		PreparedStatement st = null;
 		ResultSet rs = null;
-		Department dp = new Department();
-		Seller obj = new Seller();
+		Department dp = null;
+		Seller obj = null;
 
 		try {
 			
@@ -57,20 +57,32 @@ public class SellerDaoJDBC implements SellerDAO{
 			rs = st.executeQuery();
 			
 			if(rs.next()) {
-				dp.setId(rs.getInt("id"));
-				dp.setName(rs.getString("deepname"));
 				
-				obj.setId(rs.getInt("id"));
-				obj.setName(rs.getString("nome"));
-				obj.setBaseSalary(rs.getDouble("salario"));
-				obj.setDepartment(dp);
-				return obj;
+				dp = instiantiateDepartment(rs);
+				obj = instiatiteSeller(rs);
 			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return obj;
+	}
+
+	private Seller instiatiteSeller(ResultSet rs) {
+		Seller obj = new Seller();
+		obj.setId(rs.getInt("id"));
+		obj.setName(rs.getString("nome"));
+		obj.setBaseSalary(rs.getDouble("salario"));
+		obj.setDepartment(dp);
+		return obj;
+	}
+
+	private Department instiantiateDepartment(ResultSet rs) throws SQLException {
+		Department dp = new Department();
+		dp.setId(rs.getInt("id"));
+		dp.setName(rs.getString("deepname"));
+		
+		return dp;
 	}
 
 	@Override
