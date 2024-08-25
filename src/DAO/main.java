@@ -1,15 +1,20 @@
 package DAO;
 
+import java.sql.SQLException;
 import java.util.Date;
+
+import model.DAO.DaoFactoory;
+import model.DAO.SellerDAO;
 
 public class main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
 		// TODO Auto-generated method stub
-		Department obj = new Department(1,"Teste");
-		Seller sell = new Seller(21,"Bob","bob",new Date(),3000.0,obj);
 		
-		System.out.println(sell);
+		SellerDAO sellerDAO = DaoFactoory.createSellerDAO();
+		Seller seller = sellerDAO.findById(3);
+		
+		System.out.println(seller);
 	}
 
 }
