@@ -24,7 +24,13 @@ public class main {
 			System.out.println(obj);
 		}
 
+		System.out.println("Test 3 ------------------------ FindByAll");
+		departamento = new Department(2,null);
+		 list = sellerDAO.findAll();
 		
+		for(Seller obj : list) {
+			System.out.println(obj);
+		}
 	}
 
 }
